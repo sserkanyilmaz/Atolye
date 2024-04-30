@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Context\" />
+    <None Remove="Repositories\" />
+    <None Remove="Configurations\" />
+    <None Remove="Repositories\Persons\" />
+    <None Remove="Repositories\ActivityLogs\" />
+    <None Remove="Repositories\ConsumableInventories\" />
+    <None Remove="Repositories\Contacts\" />
+    <None Remove="Repositories\EngineerOfTheMonths\" />
+    <None Remove="Repositories\FixtureInformations\" />
+    <None Remove="Repositories\Images\" />
+    <None Remove="Repositories\Inventories\" />
+    <None Remove="Repositories\News\" />
+    <None Remove="Repositories\Projects\" />
+    <None Remove="Repositories\Reports\" />
+    <None Remove="Repositories\Sliders\" />
+    <None Remove="Repositories\Teams\" />
+    <None Remove="Repositories\CareerStuffs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Context\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Repositories\Persons\" />
+    <Folder Include="Repositories\ActivityLogs\" />
+    <Folder Include="Repositories\ConsumableInventories\" />
+    <Folder Include="Repositories\Contacts\" />
+    <Folder Include="Repositories\EngineerOfTheMonths\" />
+    <Folder Include="Repositories\FixtureInformations\" />
+    <Folder Include="Repositories\Images\" />
+    <Folder Include="Repositories\Inventories\" />
+    <Folder Include="Repositories\News\" />
+    <Folder Include="Repositories\Projects\" />
+    <Folder Include="Repositories\Reports\" />
+    <Folder Include="Repositories\Sliders\" />
+    <Folder Include="Repositories\Teams\" />
+    <Folder Include="Repositories\CareerStuffs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Atolye.Domain\Atolye.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\Atolye.Application\Atolye.Application.csproj" />
+  </ItemGroup>
+</Project>

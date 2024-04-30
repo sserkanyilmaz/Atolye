@@ -1,0 +1,105 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Abstraction\" />
+    <None Remove="Abstraction\DTOs\" />
+    <None Remove="Abstraction\Repository\" />
+    <None Remove="Features\" />
+    <None Remove="Features\Auth\" />
+    <None Remove="Features\Auth\Commands\" />
+    <None Remove="Features\Auth\Commands\Login\" />
+    <None Remove="Features\Auth\DTOs\" />
+    <None Remove="Features\Auth\Rules\" />
+    <None Remove="Features\Auth\Commands\Register\" />
+    <None Remove="Utilities\" />
+    <None Remove="Utilities\Common\" />
+    <None Remove="Features\Persons\" />
+    <None Remove="Features\Persons\Commands\" />
+    <None Remove="Features\Persons\Queries\" />
+    <None Remove="Features\Persons\DTOs\" />
+    <None Remove="Features\Persons\Queries\GetAll\" />
+    <None Remove="Features\Persons\Queries\GetById\" />
+    <None Remove="Features\Persons\Commands\Update\" />
+    <None Remove="Features\Persons\Commands\Delete\" />
+    <None Remove="Features\Persons\Commands\UpdateFamily\" />
+    <None Remove="Features\Team\" />
+    <None Remove="Features\Team\Commands\AddProjectToTeam\" />
+    <None Remove="Features\Team\Commands\AddInventoryToTeam\" />
+    <None Remove="Features\Team\Commands\AddReportToTeam\" />
+    <None Remove="Features\Team\Commands\AddImageToTeamsSlider\" />
+    <None Remove="Features\Team\Commands\AddMemberToTeam\" />
+    <None Remove="Features\Team\Commands\Update\" />
+    <None Remove="Features\Team\Commands\Delete\" />
+    <None Remove="Features\Team\Queries\" />
+    <None Remove="Features\Team\Commands\DeleteImage\" />
+    <None Remove="Features\Team\Commands\DeleteMember\" />
+    <None Remove="Features\Team\Commands\DeleteReport\" />
+    <None Remove="Features\Team\Commands\DeleteProject\" />
+    <None Remove="Features\Team\Commands\DeleteConsumableInventory\" />
+    <None Remove="Features\Team\Queries\GetById\" />
+    <None Remove="Features\Base\" />
+    <None Remove="Features\Base\Commands\" />
+    <None Remove="Features\Base\Queryies\" />
+    <None Remove="Features\Base\DTOs\" />
+    <None Remove="Features\Base\Commands\Add\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstraction\" />
+    <Folder Include="Abstraction\DTOs\" />
+    <Folder Include="Abstraction\Repository\" />
+    <Folder Include="Features\" />
+    <Folder Include="Features\Auth\" />
+    <Folder Include="Features\Auth\Commands\" />
+    <Folder Include="Features\Auth\Commands\Login\" />
+    <Folder Include="Features\Auth\DTOs\" />
+    <Folder Include="Features\Auth\Rules\" />
+    <Folder Include="Features\Auth\Commands\Register\" />
+    <Folder Include="Utilities\" />
+    <Folder Include="Utilities\Common\" />
+    <Folder Include="Features\Persons\" />
+    <Folder Include="Features\Persons\Commands\" />
+    <Folder Include="Features\Persons\Queries\" />
+    <Folder Include="Features\Persons\DTOs\" />
+    <Folder Include="Features\Persons\Queries\GetAll\" />
+    <Folder Include="Features\Persons\Queries\GetById\" />
+    <Folder Include="Features\Persons\Commands\Update\" />
+    <Folder Include="Features\Persons\Commands\Delete\" />
+    <Folder Include="Features\Persons\Commands\UpdateFamily\" />
+    <Folder Include="Features\Team\" />
+    <Folder Include="Features\Team\Commands\AddProjectToTeam\" />
+    <Folder Include="Features\Team\Commands\AddInventoryToTeam\" />
+    <Folder Include="Features\Team\Commands\AddReportToTeam\" />
+    <Folder Include="Features\Team\Commands\AddImageToTeamsSlider\" />
+    <Folder Include="Features\Team\Commands\AddMemberToTeam\" />
+    <Folder Include="Features\Team\Commands\Update\" />
+    <Folder Include="Features\Team\Commands\Delete\" />
+    <Folder Include="Features\Team\Queries\" />
+    <Folder Include="Features\Team\Queries\GetAll\" />
+    <Folder Include="Features\Team\Commands\DeleteImage\" />
+    <Folder Include="Features\Team\Commands\DeleteMember\" />
+    <Folder Include="Features\Team\Commands\DeleteReport\" />
+    <Folder Include="Features\Team\Commands\DeleteProject\" />
+    <Folder Include="Features\Team\Commands\DeleteConsumableInventory\" />
+    <Folder Include="Features\Team\Queries\GetById\" />
+    <Folder Include="Features\Base\" />
+    <Folder Include="Features\Base\Commands\" />
+    <Folder Include="Features\Base\Queryies\" />
+    <Folder Include="Features\Base\DTOs\" />
+    <Folder Include="Features\Base\Commands\Add\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atolye.Domain\Atolye.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Mediator" Version="1.0.2123" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+</Project>
