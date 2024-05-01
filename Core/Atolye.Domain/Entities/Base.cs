@@ -6,6 +6,7 @@ namespace Atolye.Domain.Entities
 	public class Base : BaseEntity
 	{
 		public string? Name { get; set; }
+
 		public List<Team>?  Teams { get; set; }
 
 		public List<Image>? Images { get; set; }
@@ -20,8 +21,7 @@ namespace Atolye.Domain.Entities
 
 		public List<ActivityLog>? ActivityLogs { get; set; }
 
-		public guid ContactId { get; set; }
-
+		public Guid? ContactId { get; set; }
 		public Contact? Contact { get; set; }
 
 

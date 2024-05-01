@@ -48,6 +48,8 @@
     <None Remove="Features\Base\Queryies\" />
     <None Remove="Features\Base\DTOs\" />
     <None Remove="Features\Base\Commands\Add\" />
+    <None Remove="Features\Base\Commands\AddTeamToBase\" />
+    <None Remove="Features\Base\Commands\Delete\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstraction\" />
@@ -92,6 +94,8 @@
     <Folder Include="Features\Base\Queryies\" />
     <Folder Include="Features\Base\DTOs\" />
     <Folder Include="Features\Base\Commands\Add\" />
+    <Folder Include="Features\Base\Commands\AddTeamToBase\" />
+    <Folder Include="Features\Base\Commands\Delete\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atolye.Domain\Atolye.Domain.csproj" />

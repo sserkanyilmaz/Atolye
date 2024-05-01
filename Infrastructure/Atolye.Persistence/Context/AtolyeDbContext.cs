@@ -8,6 +8,7 @@ namespace Atolye.Persistence.Context
 {
 	public class AtolyeDbContext : DbContext
     {
+        public DbSet<Base> Bases { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
         public DbSet<CareerStuff> CareerStuffs { get; set; }
         public DbSet<ConsumableInventory> ConsumableInventories { get; set; }

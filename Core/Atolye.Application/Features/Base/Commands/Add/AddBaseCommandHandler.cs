@@ -1,17 +1,30 @@
 ﻿using System;
+using Atolye.Application.Abstraction.Repository;
 using Atolye.Application.Features.Base.DTOs;
 using Atolye.Application.Features.Team.DTOs;
 using Atolye.Application.Utilities.Common;
+using Atolye.Domain.Entities;
+using Mapster;
 using MediatR;
 
 namespace Atolye.Application.Features.Base.Commands.Add
 {
-	public record AddBaseCommandRequest(string BaseName) : IRequest<IDataResult<BaseDTO>>;
-    public class AddBaseCommandHandler
+	public record AddBaseCommandRequest(string Name) : IRequest<IDataResult<BaseDTO>>;
+    public class AddBaseCommandHandler : IRequestHandler<AddBaseCommandRequest, IDataResult<BaseDTO>>
 	{
-		public AddBaseCommandHandler()
-		{
-		}
-	}
+        ICommandRepository<Domain.Entities.Base> _commandRepository;
+        public AddBaseCommandHandler(ICommandRepository<Domain.Entities.Base> commandRepository)
+        {
+            _commandRepository = commandRepository;
+        }
+
+        public async Task<IDataResult<BaseDTO>> Handle(AddBaseCommandRequest request, CancellationToken cancellationToken)
+        {
+            await _commandRepository.AddAsync(request.Adapt<Domain.Entities.Base>());
+            await _commandRepository.SaveAsync();
+            return new DataResult<BaseDTO>(true, request.Adapt<BaseDTO>());
+        }
+    }
+
 }
 
