@@ -11,9 +11,11 @@ namespace Atolye.Domain.Entities
 
 		public List<Image>? Images { get; set; }
 
-		public List<FixtureInventory>? fixtureInventories { get; set; }
+		public List<FixtureInventory>? FixtureInventories { get; set; }
 
 
+		public List<CareerStuff>? CareerStuffs { get; set; }
+		
 		public Guid? FixtureInformationId { get; set; }
 		public FixtureInformation? FixtureInformation { get; set; }
 

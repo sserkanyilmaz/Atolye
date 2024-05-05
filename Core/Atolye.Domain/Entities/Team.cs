@@ -12,6 +12,9 @@ namespace Atolye.Domain.Entities
         public Guid? ProjectId { get; set; }
         public Project? Project { get; set; }
 
+        public Guid? BaseId { get; set; }
+        public Base? Base { get; set; }
+
         public string? Achievements { get; set; }
         public string? History { get; set; }
 
@@ -21,5 +24,6 @@ namespace Atolye.Domain.Entities
 
         public ICollection<Report>? Reports { get; set; }
     }
+    
 }
 

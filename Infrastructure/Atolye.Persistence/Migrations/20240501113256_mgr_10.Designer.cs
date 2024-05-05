@@ -4,6 +4,7 @@ using Atolye.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Atolye.Persistence.Migrations
 {
     [DbContext(typeof(AtolyeDbContext))]
-    partial class AtolyeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240501113256_mgr_10")]
+    partial class mgr10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,11 +112,11 @@ namespace Atolye.Persistence.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("News")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("news")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -130,9 +133,6 @@ namespace Atolye.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BaseId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -143,8 +143,6 @@ namespace Atolye.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BaseId");
 
                     b.ToTable("CareerStuffs");
                 });
@@ -256,7 +254,7 @@ namespace Atolye.Persistence.Migrations
                     b.Property<Guid?>("TeamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("URL")
+                    b.Property<string>("URl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -571,13 +569,6 @@ namespace Atolye.Persistence.Migrations
                         .HasForeignKey("CareerStuffId");
                 });
 
-            modelBuilder.Entity("Atolye.Domain.Entities.CareerStuff", b =>
-                {
-                    b.HasOne("Atolye.Domain.Entities.Base", null)
-                        .WithMany("CareerStuffs")
-                        .HasForeignKey("BaseId");
-                });
-
             modelBuilder.Entity("Atolye.Domain.Entities.EngineerOfTheMonth", b =>
                 {
                     b.HasOne("Atolye.Domain.Entities.Person", "Person")
@@ -658,7 +649,7 @@ namespace Atolye.Persistence.Migrations
             modelBuilder.Entity("Atolye.Domain.Entities.FixtureInventory", b =>
                 {
                     b.HasOne("Atolye.Domain.Entities.Base", null)
-                        .WithMany("FixtureInventories")
+                        .WithMany("fixtureInventories")
                         .HasForeignKey("BaseId");
                 });
 
@@ -668,13 +659,11 @@ namespace Atolye.Persistence.Migrations
 
                     b.Navigation("BaseNews");
 
-                    b.Navigation("CareerStuffs");
-
-                    b.Navigation("FixtureInventories");
-
                     b.Navigation("Images");
 
                     b.Navigation("Teams");
+
+                    b.Navigation("fixtureInventories");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.CareerStuff", b =>

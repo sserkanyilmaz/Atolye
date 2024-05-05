@@ -7,7 +7,6 @@ namespace Atolye.Application.Features.Base.DTOs
     {
         public string? ActivityLogId { get; set; }
         public string PersonId { get; set; }
-        public PersonDTO? Person { get; set; }
 
         public DateTime TimeIn { get; set; }
         public DateTime TimeOut { get; set; }

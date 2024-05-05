@@ -33,6 +33,7 @@ namespace Atolye.API.Controllers
             IDataResult<RegisterPersonCommandResponse> response = await _mediator.Send(registerPersonCommandRequest);
             return Ok(response);
         }
+        
     }
 }
 

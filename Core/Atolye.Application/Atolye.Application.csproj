@@ -89,13 +89,9 @@
     <Folder Include="Features\Team\Commands\DeleteProject\" />
     <Folder Include="Features\Team\Commands\DeleteConsumableInventory\" />
     <Folder Include="Features\Team\Queries\GetById\" />
-    <Folder Include="Features\Base\" />
-    <Folder Include="Features\Base\Commands\" />
-    <Folder Include="Features\Base\Queryies\" />
-    <Folder Include="Features\Base\DTOs\" />
     <Folder Include="Features\Base\Commands\Add\" />
     <Folder Include="Features\Base\Commands\AddTeamToBase\" />
-    <Folder Include="Features\Base\Commands\Delete\" />
+    <Folder Include="Features\Base\Commands\DeleteTeamFromBase\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Atolye.Domain\Atolye.Domain.csproj" />

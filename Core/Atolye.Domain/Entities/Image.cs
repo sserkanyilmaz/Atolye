@@ -5,7 +5,7 @@ namespace Atolye.Domain.Entities
 {
 	public class Image : BaseEntity
 	{
-		public string? URl { get; set; }
+		public string? URL { get; set; }
 	}
 }
 
