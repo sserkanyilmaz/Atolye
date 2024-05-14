@@ -23,6 +23,14 @@ public class DeleteBaseNewsFromBaseCommandHandler : IRequestHandler<DeleteBaseNe
 
     public async Task<IDataResult<BaseDto>> Handle(DeleteBaseNewsFromBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.BaseNewsId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseNewsId is not a valid GUID.");
+        }
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
         var baseNew = await _baseNewQueryRepository.GetByIdAsync(request.BaseNewsId);
         if (baseNew != null)
         {

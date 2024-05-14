@@ -25,12 +25,31 @@ public class AddFixtureInventoryToBaseCommandHandler : IRequestHandler<AddFixtur
 
     public async Task<IDataResult<BaseDto>> Handle(AddFixtureInventoryToBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
         var baseEntity = await _queryRepository.Table.Include(b => b.FixtureInventories)
             .FirstOrDefaultAsync(b => b.Id == Guid.Parse(request.BaseId));
        if (baseEntity == null)
        { 
            return new ErrorDataResult<BaseDto>("Base not found");
        }
+       if (request.Quantity <= 0)
+       {
+           return new ErrorDataResult<BaseDto>("Quantity should be greater than 0");
+       }
+
+       if (string.IsNullOrEmpty(request.Details))
+       {
+           return new ErrorDataResult<BaseDto>("FixtureInventory details cannot be null or empty");
+       }
+
+       if (baseEntity == null)
+       { 
+           return new ErrorDataResult<BaseDto>("Base not found or not active");
+       }
+
        var fixtureInventory = new FixtureInventory
        {
            Name = request.Name, Quantity = request.Quantity, Details = request.Details

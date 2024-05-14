@@ -26,7 +26,35 @@ public class AddImageToBaseCommandHandler  : IRequestHandler<AddImageToBaseComma
 
     public async Task<IDataResult<BaseDto>> Handle(AddImageToBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
         var Base =await  _queryRepository.Table.Include(i=>i.Images).FirstOrDefaultAsync(b=>b.Id == Guid.Parse(request.BaseId));
+                
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
+        if (string.IsNullOrEmpty(request.Url) || string.IsNullOrEmpty(request.BaseId))
+        {
+            throw new ArgumentException("Url or BaseId should not be null or empty.");
+        }
+
+
+        if (Base == null)
+        {
+            return new DataResult<BaseDto>("Base not found.", false, null); 
+        }
+
+         
+        if (!Base.IsActive)
+        {
+            return new DataResult<BaseDto>("Base is not active.", false, null);
+        }
+
+        Base.Images.Add(new Image() { URL = request.Url });
         Base.Images.Add(new Image(){URL= request.Url}); 
         await _commandRepository.UpdateAsync(Base);
         return new DataResult<BaseDto>("Image successfully added to base.", true, Base.Adapt<BaseDto>());

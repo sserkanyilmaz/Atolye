@@ -25,6 +25,14 @@ public class DeleteImageFromBaseCommandHandler : IRequestHandler<DeleteImageFrom
 
     public async Task<IDataResult<BaseDto>> Handle(DeleteImageFromBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.ImageId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("ImageId is not a valid GUID.");
+        }
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
         var Base = await _baseQueryRepository.Table.Include(b => b.Images)
             .FirstOrDefaultAsync(b => b.Id == Guid.Parse(request.BaseId));
         var image = await _imageQueryRepository.GetByIdAsync(request.ImageId);

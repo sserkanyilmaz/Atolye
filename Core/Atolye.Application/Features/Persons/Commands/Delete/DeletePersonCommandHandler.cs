@@ -19,7 +19,12 @@ namespace Atolye.Application.Features.Persons.Commands.Delete
 
         public async Task<IDataResult<PersonDTO>> Handle(DeletePersonCommandRequest request, CancellationToken cancellationToken)
         {
+            if (!Guid.TryParse(request.Id, out _))
+            {
+                return new ErrorDataResult<PersonDTO>("TeamId is not a valid GUID.");
+            }
             Person  person = await _personCommandRepository.RemoveAsync(request.Id);
+            
             return new SuccessDataResult<PersonDTO>(person.Name + "Kullanıcı Silindi.", person.Adapt<PersonDTO>());
         }
         

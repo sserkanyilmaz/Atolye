@@ -21,13 +21,28 @@ public class AddBaseNewsToBaseCommandHandler : IRequestHandler<AddBaseNewsToBase
 
     public async Task<IDataResult<BaseDto>> Handle(AddBaseNewsToBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
         var baseEntity = await _queryRepository.Table.Include(b => b.BaseNews)
             .FirstOrDefaultAsync(b => b.Id == Guid.Parse(request.BaseId));
+        
+        
+        if (string.IsNullOrEmpty(request.BaseId) || string.IsNullOrEmpty(request.NewsContent)) 
+        {
+            return new ErrorDataResult<BaseDto>("Request parameters cannot be null or empty");
+        }
+
         if (baseEntity == null)
         {
             return new ErrorDataResult<BaseDto>("Base not found");
         }
 
+        if (!baseEntity.IsActive)
+        {
+            return new ErrorDataResult<BaseDto>("Base is not active");
+        }
         var baseNew = new BaseNew
         {
             News = request.NewsContent,

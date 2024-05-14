@@ -22,13 +22,27 @@ public class AddCareerStuffToBaseCommandHandler : IRequestHandler<AddCareerStuff
 
     public async Task<IDataResult<BaseDto>> Handle(AddCareerStuffToBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
         var baseEntity = await _queryRepository.Table.Include(b => b.CareerStuffs)
             .FirstOrDefaultAsync(b => b.Id == Guid.Parse(request.BaseId));
-        if (baseEntity == null)
+        
+        if (baseEntity == null || !baseEntity.IsActive)
         {
-            return new ErrorDataResult<BaseDto>("Base not found");
+            return new ErrorDataResult<BaseDto>("Base not found or inactive");
         }
-    
+
+        if(request.NewsContents == null || request.NewsContents.Contains(null) || !request.NewsContents.Any()) 
+        {
+            return new ErrorDataResult<BaseDto>("NewsContents are not valid");
+        }
+
+        if(request.ImageUrls == null || request.ImageUrls.Contains(null) || !request.ImageUrls.Any()) 
+        {
+            return new ErrorDataResult<BaseDto>("ImageUrls are not valid");
+        }
         var careerStuff = new CareerStuff();
         careerStuff.Images = new List<Image>();
         careerStuff.News = new List<BaseNew>();

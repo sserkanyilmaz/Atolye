@@ -22,6 +22,14 @@ public class DeleteCareerStuffFromBaseCommandHandler : IRequestHandler<DeleteCar
 
     public async Task<IDataResult<BaseDto>> Handle(DeleteCareerStuffFromBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
+        if (!Guid.TryParse(request.CareerStuffId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("CareerStuffId is not a valid GUID.");
+        }
         var baseEntity = await _queryRepository.Table.Include(b => b.CareerStuffs)
             .FirstOrDefaultAsync(b => b.Id == Guid.Parse(request.BaseId));
         if (baseEntity == null)

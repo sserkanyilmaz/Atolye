@@ -21,6 +21,7 @@ namespace Atolye.Application.Features.Team.Commands.DeleteImage
 
         public async Task<IDataResult<TeamDTO>> Handle(DeleteImageCommandRequest request, CancellationToken cancellationToken)
         {
+            
             var image = await _imageCommandRepository.RemoveAsync(request.ImageId);
             var team = await _queryRepository.Table.Include(t => t.Images).FirstOrDefaultAsync(t => t.Id == Guid.Parse(request.TeamId));
             var teamDTO = team.Adapt<TeamDTO>();

@@ -25,6 +25,14 @@ public class DeleteFixtureInventoryFromBaseCommandHandler : IRequestHandler<Dele
 
     public async Task<IDataResult<BaseDto>> Handle(DeleteFixtureInventoryFromBaseCommandRequest request, CancellationToken cancellationToken)
     {
+        if (!Guid.TryParse(request.BaseId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+        }
+        if (!Guid.TryParse(request.FixtureInventoryId, out _))
+        {
+            return new ErrorDataResult<BaseDto>("FixtureInventoryId is not a valid GUID.");
+        }
         var fixtureInventory = await _fixtureQueryRepository.GetByIdAsync(request.FixtureInventoryId);
         if (fixtureInventory != null)
         {

@@ -26,7 +26,14 @@ namespace Atolye.Application.Features.Base.Commands.DeleteTeamFrom
         }
         public async Task<IDataResult<BaseDto>> Handle(DeleteTeamFromBaseCommandRequest request, CancellationToken cancellationToken)
         {
-            
+            if (!Guid.TryParse(request.BaseId, out _))
+            {
+                return new ErrorDataResult<BaseDto>("BaseId is not a valid GUID.");
+            }
+            if (!Guid.TryParse(request.TeamId, out _))
+            {
+                return new ErrorDataResult<BaseDto>("TeamId is not a valid GUID.");
+            }
             var team = await _teamQueryRepository.GetByIdAsync(request.TeamId);
             team.BaseId = null;
             await _teamCommandRepository.UpdateAsync(team);
