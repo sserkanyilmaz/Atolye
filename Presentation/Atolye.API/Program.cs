@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+EntitiesMapping.Configure();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

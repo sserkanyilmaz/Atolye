@@ -27,8 +27,29 @@ namespace Atolye.Application.Features.Team.Commands.DeleteConsumableInventory
 
         public async Task<IDataResult<TeamDTO>> Handle(DeleteConsumableInventoryCommandRequest request, CancellationToken cancellationToken)
         {
+                        
+            if (!Guid.TryParse(request.TeamId, out _))
+            {
+                throw new ArgumentException("TeamId is not a valid guid string");
+            }
+
+            Guid inventoryIdGuid;
+            if (!Guid.TryParse(request.InventoryId, out _))
+            {
+                throw new ArgumentException("InventoryId is not a valid guid string");
+            }
             var inventory =await _consumableInventorycommandRepository.RemoveAsync(request.InventoryId);
             var team = await _queryRepository.Table.Include(t => t.ConsumableInventory).FirstOrDefaultAsync(t => t.Id == Guid.Parse(request.TeamId));
+            
+            if (team == null || !team.IsActive)
+            {
+                return new ErrorDataResult<TeamDTO>("Team does not exist or is not active");
+            }
+
+            if (inventory == null || !inventory.IsActive)
+            {
+                return new ErrorDataResult<TeamDTO>("Inventory does not exist or is not active");
+            }
             var teamDTO = team.Adapt<TeamDTO>();
             teamDTO.ConsumableInventory = team.ConsumableInventory.Where(ci=>ci.IsActive== true).Select(ci => ci.Adapt<ConsumableInventoryDTO>()).ToList() ?? new List<ConsumableInventoryDTO>();
             return new DataResult<TeamDTO>(true, teamDTO);

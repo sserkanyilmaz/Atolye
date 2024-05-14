@@ -23,6 +23,23 @@ namespace Atolye.Application.Features.Team.Commands.AddInventoryToTeam
         public async Task<IDataResult<ConsumableInventoryDTO>> Handle(AddConsumableInventoryTeamCommandRequest request, CancellationToken cancellationToken)
         {
             var team = await _queryRepository.Table.Include(t=>t.ConsumableInventory).FirstOrDefaultAsync(u=>u.Id == Guid.Parse(request.TeamId));
+           
+
+            if (team == null)
+            {
+                return new ErrorDataResult<ConsumableInventoryDTO>("Invalid team.");
+            }
+
+            if (!team.IsActive)
+            {
+                return new ErrorDataResult<ConsumableInventoryDTO>("This team is not active.");
+            }
+
+            if (string.IsNullOrEmpty(request.Name) || request.Quantity <= 0 || string.IsNullOrEmpty(request.Details))
+            {
+                return new ErrorDataResult<ConsumableInventoryDTO>("Invalid request.");
+            }
+
             team.ConsumableInventory.Add(request.Adapt<ConsumableInventory>());
             await _commandRepository.UpdateAsync(team);
             var consumableInventory = team.ConsumableInventory.ToList().Last();

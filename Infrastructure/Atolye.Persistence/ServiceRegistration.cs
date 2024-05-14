@@ -73,6 +73,9 @@ namespace Atolye.Persistence
             services.AddScoped<IQueryRepository<Person>, QueryRepository<Person>>();
             services.AddScoped<ICommandRepository<Person>, PersonCommandRepository>();
 
+            services.AddScoped<IQueryRepository<Base>, QueryRepository<Base>>();
+            services.AddScoped<ICommandRepository<Base>, CommandRepository<Base>>();
+
             services.AddScoped<IQueryRepository<Team>, QueryRepository<Team>>();
             services.AddScoped<ICommandRepository<Team>, TeamCommandRepository>();
 

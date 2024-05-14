@@ -5,7 +5,7 @@ namespace Atolye.Domain.Entities
 {
 	public class BaseNew : BaseEntity
 	{
-		public string? news { get; set; }
+		public string? News { get; set; }
 	}
 }
 

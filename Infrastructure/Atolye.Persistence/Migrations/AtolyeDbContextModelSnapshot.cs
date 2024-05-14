@@ -28,6 +28,9 @@ namespace Atolye.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BaseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -48,15 +51,86 @@ namespace Atolye.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BaseId");
+
                     b.HasIndex("PersonId");
 
                     b.ToTable("ActivityLogs");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.Base", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ContactId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("FixtureInformationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContactId");
+
+                    b.HasIndex("FixtureInformationId");
+
+                    b.ToTable("Bases");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.BaseNew", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BaseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CareerStuffId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("News")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BaseId");
+
+                    b.HasIndex("CareerStuffId");
+
+                    b.ToTable("BaseNew");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.CareerStuff", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BaseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
@@ -70,7 +144,35 @@ namespace Atolye.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BaseId");
+
                     b.ToTable("CareerStuffs");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.Contact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.EngineerOfTheMonth", b =>
@@ -136,6 +238,9 @@ namespace Atolye.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BaseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("CareerStuffId")
                         .HasColumnType("uniqueidentifier");
 
@@ -151,13 +256,15 @@ namespace Atolye.Persistence.Migrations
                     b.Property<Guid?>("TeamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("URl")
+                    b.Property<string>("URL")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BaseId");
 
                     b.HasIndex("CareerStuffId");
 
@@ -203,34 +310,6 @@ namespace Atolye.Persistence.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Inventory");
 
                     b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("Atolye.Domain.Entities.News", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CareerStuffId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("news")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CareerStuffId");
-
-                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.Person", b =>
@@ -399,6 +478,9 @@ namespace Atolye.Persistence.Migrations
                     b.Property<string>("Achievements")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("BaseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -419,6 +501,8 @@ namespace Atolye.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BaseId");
+
                     b.ToTable("Teams");
                 });
 
@@ -438,11 +522,20 @@ namespace Atolye.Persistence.Migrations
                 {
                     b.HasBaseType("Atolye.Domain.Entities.Inventory");
 
+                    b.Property<Guid?>("BaseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("BaseId");
+
                     b.HasDiscriminator().HasValue("FixtureInventory");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.ActivityLog", b =>
                 {
+                    b.HasOne("Atolye.Domain.Entities.Base", null)
+                        .WithMany("ActivityLogs")
+                        .HasForeignKey("BaseId");
+
                     b.HasOne("Atolye.Domain.Entities.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
@@ -450,6 +543,39 @@ namespace Atolye.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.Base", b =>
+                {
+                    b.HasOne("Atolye.Domain.Entities.Contact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId");
+
+                    b.HasOne("Atolye.Domain.Entities.FixtureInformation", "FixtureInformation")
+                        .WithMany()
+                        .HasForeignKey("FixtureInformationId");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("FixtureInformation");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.BaseNew", b =>
+                {
+                    b.HasOne("Atolye.Domain.Entities.Base", null)
+                        .WithMany("BaseNews")
+                        .HasForeignKey("BaseId");
+
+                    b.HasOne("Atolye.Domain.Entities.CareerStuff", null)
+                        .WithMany("News")
+                        .HasForeignKey("CareerStuffId");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.CareerStuff", b =>
+                {
+                    b.HasOne("Atolye.Domain.Entities.Base", null)
+                        .WithMany("CareerStuffs")
+                        .HasForeignKey("BaseId");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.EngineerOfTheMonth", b =>
@@ -465,6 +591,10 @@ namespace Atolye.Persistence.Migrations
 
             modelBuilder.Entity("Atolye.Domain.Entities.Image", b =>
                 {
+                    b.HasOne("Atolye.Domain.Entities.Base", null)
+                        .WithMany("Images")
+                        .HasForeignKey("BaseId");
+
                     b.HasOne("Atolye.Domain.Entities.CareerStuff", null)
                         .WithMany("Images")
                         .HasForeignKey("CareerStuffId");
@@ -476,13 +606,6 @@ namespace Atolye.Persistence.Migrations
                     b.HasOne("Atolye.Domain.Entities.Team", null)
                         .WithMany("Images")
                         .HasForeignKey("TeamId");
-                });
-
-            modelBuilder.Entity("Atolye.Domain.Entities.News", b =>
-                {
-                    b.HasOne("Atolye.Domain.Entities.CareerStuff", null)
-                        .WithMany("News")
-                        .HasForeignKey("CareerStuffId");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.Person", b =>
@@ -512,6 +635,15 @@ namespace Atolye.Persistence.Migrations
                     b.Navigation("Team");
                 });
 
+            modelBuilder.Entity("Atolye.Domain.Entities.Team", b =>
+                {
+                    b.HasOne("Atolye.Domain.Entities.Base", "Base")
+                        .WithMany("Teams")
+                        .HasForeignKey("BaseId");
+
+                    b.Navigation("Base");
+                });
+
             modelBuilder.Entity("Atolye.Domain.Entities.ConsumableInventory", b =>
                 {
                     b.HasOne("Atolye.Domain.Entities.Team", "Team")
@@ -521,6 +653,28 @@ namespace Atolye.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.FixtureInventory", b =>
+                {
+                    b.HasOne("Atolye.Domain.Entities.Base", null)
+                        .WithMany("FixtureInventories")
+                        .HasForeignKey("BaseId");
+                });
+
+            modelBuilder.Entity("Atolye.Domain.Entities.Base", b =>
+                {
+                    b.Navigation("ActivityLogs");
+
+                    b.Navigation("BaseNews");
+
+                    b.Navigation("CareerStuffs");
+
+                    b.Navigation("FixtureInventories");
+
+                    b.Navigation("Images");
+
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("Atolye.Domain.Entities.CareerStuff", b =>
